@@ -14,6 +14,10 @@ class Colorhelper {
   static const Color recommand_bg = Color(0xffF9F9F9);
   static const Color recommand_text = Color(0xff1D1F22);
   static const Color discover_icon = Color(0xff777E90);
+  static const Color clothingbanner = Color(0xffA3A798);
+  static const Color accessoriesbanner = Color(0xff9C9492);
+  static const Color shoesbanner = Color(0xff44565C);
+  static const Color collectionbanner = Color(0xffB9AEB2);
 
 
   
