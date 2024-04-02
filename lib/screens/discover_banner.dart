@@ -230,7 +230,8 @@ class Discover_banner extends StatelessWidget {
                             "assets/Images/discover4.png",
                             height:double.infinity,
                             fit: BoxFit.fill,
-                          ))
+                          )),
+                          Text("data"),
                     ],
                   ),
                 ),
