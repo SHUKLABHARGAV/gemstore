@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class user_screen extends StatelessWidget {
-  const user_screen({Key? key}) : super(key: key);
+class user_screen extends StatefulWidget {
+   @override
+  State<StatefulWidget> createState() {
+    return _user_screenState();
+  }
+    
+}
+   class _user_screenState extends State<user_screen> {
+  
+      
   @override
   Widget build(BuildContext context) {
     return Scaffold(
