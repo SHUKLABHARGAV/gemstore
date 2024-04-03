@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gemstore/screens/discover_banner.dart';
+import 'package:gemstore/screens/search_screen.dart';
 import 'package:gemstore/utils/color_helper.dart';
 
 import 'package:sizer/sizer.dart';
@@ -41,6 +42,13 @@ class discover_store extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Material(
                           child: TextField(
+                               onTap: () {
+                             Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Search_screen()),
+                  );
+                            },
+                            readOnly: true,
                             decoration: InputDecoration(
                                 hintText: "Search",
                                 filled: true,
@@ -49,8 +57,8 @@ class discover_store extends StatelessWidget {
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(35),
                                     borderSide: BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 224, 224, 224))),
+                                        color: Color.fromARGB(
+                                            255, 224, 224, 224))),
                                 fillColor: Color.fromARGB(255, 222, 222, 222),
                                 prefixIcon: Icon(Icons.search),
                                 disabledBorder: OutlineInputBorder(
@@ -64,7 +72,8 @@ class discover_store extends StatelessWidget {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25),
                                     borderSide: BorderSide(
-                                        color: Colors.white.withOpacity(0.2)))),
+                                        color:
+                                            Colors.white.withOpacity(0.2)))),
                           ),
                         ),
                       ),
@@ -93,4 +102,3 @@ class discover_store extends StatelessWidget {
         ));
   }
 }
-

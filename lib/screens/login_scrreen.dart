@@ -101,10 +101,10 @@ class login extends StatelessWidget {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                               Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const forgot_password()),
-                  );
+                                Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const forgot_password()),
+                    );
                             },
                             child: Text(
                               "Forgot Password?",
