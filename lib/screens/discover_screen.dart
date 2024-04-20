@@ -35,49 +35,37 @@ class discover_store extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      height: 8.h,
-                      width: 80.w,
+            
+                  SizedBox(
+                    width: 78.w,
+                    child: FloatingActionButton(
+                      backgroundColor: Color(0xffFAFAFA),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Material(
-                          child: TextField(
-                               onTap: () {
-                             Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Search_screen()),
-                  );
-                            },
-                            readOnly: true,
-                            decoration: InputDecoration(
-                                hintText: "Search",
-                                filled: true,
-                                focusColor: Color(0xffFAFAFA),
-                                enabled: true,
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(35),
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(
-                                            255, 224, 224, 224))),
-                                fillColor: Color.fromARGB(255, 222, 222, 222),
-                                prefixIcon: Icon(Icons.search),
-                                disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                    borderSide:
-                                        BorderSide(color: Color(0xffFAFAFA))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                    borderSide:
-                                        BorderSide(color: Color(0xffFAFAFA))),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                    borderSide: BorderSide(
-                                        color:
-                                            Colors.white.withOpacity(0.2)))),
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(Icons.search,
+                            color: Color(0xff777E90)),
+                            SizedBox(
+                              width: 2.w,
+                            ),
+                            Text("Search",
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Color(0xff777E90)
+                            ),)
+                          ],
                         ),
                       ),
-                    ),
+                        onPressed: () {
+                        Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Search_screen()),
+  );
+                        },
+                       ),
+                  ),
                     Container(
                       height: 6.h,
                       width: 13.w,
