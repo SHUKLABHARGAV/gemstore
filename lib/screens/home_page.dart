@@ -74,6 +74,42 @@ class _home_pageState extends State<home_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        width: 38.h,
+        child: Padding(
+          padding: EdgeInsets.only(top: 8.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center, 
+            children: [ 
+              Container(
+          
+                child: Row( 
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      // backgroundColor: Colors.amber,
+                    //  child: Image.asset("assets/Images/user.png", fit: BoxFit.scaleDown,)
+                      child: Icon(Icons.person, size: 40,),
+                      
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column( 
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Shukla Bhargav",style: TextStyle(fontSize:15),),
+                          Text("Bhargavshukla483@gmail.com", style: TextStyle(fontSize: 12),),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
      appBar: AppBar(
         centerTitle: true,
         title: Text("Gemstore"),
