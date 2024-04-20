@@ -18,6 +18,7 @@ class Colorhelper {
   static const Color accessoriesbanner = Color(0xff9C9492);
   static const Color shoesbanner = Color(0xff44565C);
   static const Color collectionbanner = Color(0xffB9AEB2);
+  static const Color btncolor = Color(0xff343434);
 
 
   

@@ -1,5 +1,7 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:gemstore/utils/color_helper.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';
 
@@ -143,25 +145,48 @@ class RateScreen extends StatefulWidget {
             child: Row(
               
               children: [
-                Container(
-                  color: Colors.amber,
-                  height: 10.h,
-                  width: 25.w,
-                  child:Text("hello")
+          
+                DottedBorder(
+                  dashPattern: [15,4],
+                  color: Color(0xffCCD2E3),
+                  strokeWidth: 2,
+                  child: Container(
+                 
+                    height: 8.h,
+                    width: 20.w,
+                    child:Icon(Icons.image_outlined,
+                    color: Color(0xffCCD2E3),
+                    size: 50,)
+                  ),
                 ),
                 SizedBox(width: 2.h,),
-                Container(
-              decoration: BoxDecoration(
-                border: Border.all()
-              ),
-              height: 10.h,
-              width: 25.w,
-              child:Text("hello")
-            ),
+               DottedBorder(
+                  dashPattern: [15,4],
+                  color: Color(0xffCCD2E3),
+                  strokeWidth: 2,
+                  child: Container(
+                 
+                    height: 8.h,
+                    width: 20.w,
+                    child:Icon(Icons.camera_alt_outlined,
+                    color: Color(0xffCCD2E3),
+                    size: 50,)
+                  ),
+                ),
               ],
             ),
           ),
-        
+               SizedBox(height: 2.h,),
+        SizedBox(
+          width: 40.h,
+          height: 6.h,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colorhelper.btncolor),
+            onPressed:  () {
+            
+          },
+           child: Text("Submit Review",style: TextStyle(color: Colors.white,fontSize: 11.sp),)),
+        )
            ],
         ),
       )
