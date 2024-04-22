@@ -1,14 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gemstore/screens/Trackorder.dart';
 import 'package:gemstore/screens/my_order_screen.dart';
 import 'package:gemstore/screens/pendingOrder.dart';
 import 'package:gemstore/screens/rateScreen.dart';
+import 'package:gemstore/utils/color_helper.dart';
  
 import 'package:sizer/sizer.dart';
 
-class PendingorderDetail extends StatelessWidget {
+class PendingorderDetail extends StatefulWidget {
   const PendingorderDetail({Key? key}) : super(key: key);
+
+  @override
+  State<PendingorderDetail> createState() => _PendingorderDetailState();
+}
+
+class _PendingorderDetailState extends State<PendingorderDetail> {
+   bool showContinueButoon= false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +65,41 @@ class PendingorderDetail extends StatelessWidget {
               ],
             ),
             SizedBox(height: 5.h),
-            Container(
+            if( showContinueButoon == true)...[Container(
+              height: 12.h,
+              decoration: BoxDecoration(
+                  color: Color(0xff575757),
+                  borderRadius: BorderRadius.circular(15)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 3.h),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Your order is on the way",
+                          style: TextStyle(color: Colors.white, fontSize: 19),
+                        ),
+                        Text(
+                          "Click here to track your order",
+                          style: TextStyle(color: Colors.white, fontSize: 10),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 3.h),
+                    child: Image.asset(
+                      "assets/Images/orderontheway.png",
+                      height: 7.h,
+                    ),
+                  )
+                ],
+              ),
+            ),]else...[ Container(
               height: 12.h,
               decoration: BoxDecoration(
                   color: Color(0xff575757),
@@ -89,7 +132,8 @@ class PendingorderDetail extends StatelessWidget {
                   )
                 ],
               ),
-            ),
+            ),]
+           ,
             Container(
               height: 56.h,
               child: ListView.builder(
@@ -262,7 +306,22 @@ class PendingorderDetail extends StatelessWidget {
                 },
               ),
             ),
-            Row( 
+            if(
+              showContinueButoon == true
+              
+            )...[ SizedBox(
+            width: double.infinity,
+            height: 6.h,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colorhelper.btncolor),
+              onPressed:  () {
+                     Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => trackOrder()),);
+            },
+             child: Text("Continue Shoping",style: TextStyle(color: Colors.white,fontSize: 11.sp),)),
+          )]
+          else...[Row( 
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
@@ -280,18 +339,23 @@ class PendingorderDetail extends StatelessWidget {
                   width: 40.w,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(backgroundColor: Colors.white,side: BorderSide(color: Colors.black)),
-                    onPressed: () {
-                    Navigator.push(
+                    onPressed: () async{
+                   final data = await Navigator.push (
     context,
     MaterialPageRoute(builder: (context) => const RateScreen()),
   );
+  if(data != null){
+  setState(() {
+  showContinueButoon=data;
+  });}
                   }, child: Text("Rate",style: TextStyle(
                     color: Colors.black
                   ),)),
                 )
               ],
             )
-          ],
+]
+                      ],
         ),
       ),
     );

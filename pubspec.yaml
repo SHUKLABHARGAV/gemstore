@@ -51,6 +51,8 @@ dependencies:
   image_picker: ^1.1.0
   dotted_border: ^2.1.0
   flutter_rating_bar: ^4.0.1
+  im_stepper: ^1.0.1+1
+  easy_stepper: ^0.8.3
   # input_history_text_field: ^0.2.0
   # dots_indicator: ^3.0.0
   # flutter_carousel_widget: ^2.2.0
