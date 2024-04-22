@@ -158,6 +158,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.19"
+  flutter_rating_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_rating_bar
+      sha256: d2af03469eac832c591a1eba47c91ecc871fe5708e69967073c043b2d775ed93
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
   flutter_rating_stars:
     dependency: "direct main"
     description:
@@ -212,10 +220,10 @@ packages:
     dependency: "direct main"
     description:
       name: image_picker
-      sha256: "1f498d086203360cca099d20ffea2963f48c39ce91bdd8a3b6d4a045786b02c8"
+      sha256: fe9ee64ccb8d599a5dfb0e21cc6652232c610bcf667af4e79b9eb175cc30a7a5
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.8"
+    version: "1.1.0"
   image_picker_android:
     dependency: transitive
     description:

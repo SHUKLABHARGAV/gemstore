@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:gemstore/utils/color_helper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';
 
 class RateScreen extends StatefulWidget {
- 
+
+
   const RateScreen({Key? key}) : super(key: key);
    @override
   State<StatefulWidget> createState() {
@@ -15,6 +20,7 @@ class RateScreen extends StatefulWidget {
 } 
   
   class Rate_screenState extends State<RateScreen> {
+     File ? selectedImage;
   @override
   Widget build(BuildContext context) {
    double value = 3;
@@ -96,39 +102,23 @@ class RateScreen extends StatefulWidget {
                   ),
                 ),
                 SizedBox(height: 1.h,),
-               RatingStars(
-              value: value,
-              onValueChanged: (v) {
-            
-                setState(() {
-                  value = v;
-                });
-              },
-              starBuilder: (index, color) => Icon(
-                Icons.star,
-               size: 50,
-                color: color,
-              ),
-              starCount: 5,
-              starSize: 50,
-              valueLabelColor: const Color(0xff9b9b9b),
-              valueLabelTextStyle: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 12),
-              valueLabelRadius: 10,
-              maxValue: 5,
-              starSpacing: 2,
-              // maxValueVisibility: true,
-              valueLabelVisibility: false,
-              animationDuration: Duration(milliseconds: 1000),
-              valueLabelPadding:
-                  const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
-              valueLabelMargin: const EdgeInsets.only(right: 8),
-              starOffColor: const Color(0xffB1B5C3),
-              starColor: Color(0xff508A7B),
-            ),
+                RatingBar.builder(
+   initialRating: 3,
+   minRating: 1,
+   direction: Axis.horizontal,
+   allowHalfRating: true,
+   itemCount: 5,
+   itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+   itemBuilder: (context, index) => Icon(
+     Icons.star,
+     color:Color(0xff508A7B),
+     size: 50,
+   ),
+   onRatingUpdate: (rating) {
+     print(rating);
+   },
+),
+               
             SizedBox( height: 1.h,),
             TextField(
               textAlign: TextAlign.start,
@@ -156,9 +146,16 @@ class RateScreen extends StatefulWidget {
                    
                       height: 8.h,
                       width: 20.w,
-                      child:Icon(Icons.image_outlined,
-                      color: Color(0xffCCD2E3),
-                      size: 50,)
+                      child:GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _pickImageFromGallary();
+                          });
+                        },
+                        child: Icon(Icons.image_outlined,
+                        color: Color(0xffCCD2E3),
+                        size: 50,),
+                      )
                     ),
                   ),
                   SizedBox(width: 2.h,),
@@ -170,14 +167,27 @@ class RateScreen extends StatefulWidget {
                    
                       height: 8.h,
                       width: 20.w,
-                      child:Icon(Icons.camera_alt_outlined,
-                      color: Color(0xffCCD2E3),
-                      size: 50,)
+                      child:GestureDetector(
+                        onTap: () {
+                          _pickImageFromCamera();
+                        },
+                        child: Icon(Icons.camera_alt_outlined,
+                        color: Color(0xffCCD2E3),
+                        size: 50,),
+                      )
                     ),
                   ),
+                   Container(
+                                      
+                     height: 8.h,
+                     width: 20.w,
+                     child: selectedImage != null ? Image.file(selectedImage!):const Text("")
+                   ),
                 ],
               ),
             ),
+                 SizedBox(height: 2.h,),
+                  
                  SizedBox(height: 2.h,),
           SizedBox(
             width: 40.h,
@@ -194,5 +204,17 @@ class RateScreen extends StatefulWidget {
         ),
       )
     );
+  }
+  Future _pickImageFromGallary() async{
+    final returnedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      selectedImage = File(returnedImage!.path);
+    });
+  }
+    Future _pickImageFromCamera() async{
+    final returnedImage = await ImagePicker().pickImage(source: ImageSource.camera);
+    setState(() {
+      selectedImage = File(returnedImage!.path);
+    });
   }
 }
