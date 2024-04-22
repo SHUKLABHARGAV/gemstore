@@ -4,6 +4,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:gemstore/screens/PendingorderDetail.dart';
+import 'package:gemstore/screens/my_order_screen.dart';
+import 'package:gemstore/screens/pendingOrder.dart';
 import 'package:gemstore/utils/color_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
@@ -23,7 +26,7 @@ class RateScreen extends StatefulWidget {
      File ? selectedImage;
   @override
   Widget build(BuildContext context) {
-   double value = 3;
+ 
     return Scaffold(
       
       body:  SingleChildScrollView(
@@ -48,9 +51,16 @@ class RateScreen extends StatefulWidget {
                             ]),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            size: 30,
+                          child: GestureDetector(
+                            onTap: () {
+                      Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => order_screen()),);
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 30,
+                            ),
                           ),
                         )),
                     Text(
@@ -195,7 +205,7 @@ class RateScreen extends StatefulWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colorhelper.btncolor),
               onPressed:  () {
-              
+                      Navigator.pop(context, true);
             },
              child: Text("Submit Review",style: TextStyle(color: Colors.white,fontSize: 11.sp),)),
           )
