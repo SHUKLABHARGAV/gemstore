@@ -8,7 +8,6 @@ import 'package:gemstore/screens/my_order_screen.dart';
 import 'package:gemstore/screens/user_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:sizer/sizer.dart';
 
 class home_screen_store extends StatefulWidget {
   @override
