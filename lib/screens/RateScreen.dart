@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_rating_stars/flutter_rating_stars.dart';
-import 'package:gemstore/screens/PendingorderDetail.dart';
+// import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+// import 'package:gemstore/screens/PendingorderDetail.dart';
 import 'package:gemstore/screens/my_order_screen.dart';
-import 'package:gemstore/screens/pendingOrder.dart';
+// import 'package:gemstore/screens/pendingOrder.dart';
 import 'package:gemstore/utils/color_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';
+// import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';
 
 class RateScreen extends StatefulWidget {
 

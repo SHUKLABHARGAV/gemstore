@@ -7,8 +7,18 @@ import 'package:gemstore/screens/signup_screen.dart';
 import 'package:gemstore/utils/color_helper.dart';
 import 'package:sizer/sizer.dart';
 
-class login extends StatelessWidget {
+class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
+
+  @override
+  State<login> createState() => _loginState();
+}
+
+class _loginState extends State<login> {
+  TextEditingController Emailcontroller = TextEditingController();
+  TextEditingController Passwordcontroller = TextEditingController();
+final GlobalKey<FormState> _loginkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     String? validateEmail(String? value) {
@@ -23,7 +33,7 @@ class login extends StatelessWidget {
 
   return value!.isNotEmpty && !regex.hasMatch(value)
       ? 'Enter a valid email address'
-      : null;
+      : value.isEmpty? 'Enter a email address':null ;
 }
     return Scaffold(
 
@@ -67,56 +77,61 @@ class login extends StatelessWidget {
                 
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Column(
-                    children: [
-                       
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 2.h),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Email address",
-                          ),
-                          validator: validateEmail,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp("[0-9@a-zA-Z.]")),
-                            
-                          ],
-                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                           
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 2.h),
-                        child: TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () {
-                                Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const forgot_password()),
-                    );
-                            },
-                            child: Text(
-                              "Forgot Password?",
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontFamily: "Product-Light"
-                          ),
+                  child: Form(
+                    key: _loginkey,
+                    child: Column(
+                      children: [
+                         
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.h),
+                          child: TextFormField(
+                            controller:Emailcontroller ,
+                            decoration: InputDecoration(
+                              hintText: "Email address",
                             ),
-                          
-                          )),
-                      )
-                    ],
+                            validator:(value)=> validateEmail(value),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(RegExp("[0-9@a-zA-Z.]")),
+                              
+                            ],
+                             autovalidateMode: AutovalidateMode.onUserInteraction,
+                             
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.h),
+                          child: TextFormField(
+                            controller: Passwordcontroller,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: "Password",
+                              
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {
+                                  Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const forgot_password()),
+                      );
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontFamily: "Product-Light"
+                            ),
+                              ),
+                            
+                            )),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -129,10 +144,20 @@ class login extends StatelessWidget {
               width: 15.h,
               child: ElevatedButton(
                 onPressed: () {
-                      Navigator.push(
+                
+                  if(_loginkey.currentState?.validate()??false){
+                    if((Emailcontroller.text=="bhargav123@gmail.com")&& (Passwordcontroller.text == '12345678')){
+      Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) =>  home_screen_store()),
                   );
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter valid username or password")));
+                      
+                    }
+
+                  }
+                  
                 },
                 child: Text(
                   "LOG   IN",
@@ -253,6 +278,5 @@ class login extends StatelessWidget {
       ),
     );
   }
-  
 }
  
