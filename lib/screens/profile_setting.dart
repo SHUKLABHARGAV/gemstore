@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gemstore/screens/user_screen.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
 class profileSetting extends StatefulWidget {
@@ -12,6 +15,7 @@ class profileSetting extends StatefulWidget {
 }
 
 class _profileSettingState extends State<profileSetting> {
+         File ? selectedImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,11 +75,8 @@ class _profileSettingState extends State<profileSetting> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.amber,
-                    image: DecorationImage(
-                        image: AssetImage(
-                          "assets/Images/user.png",
-                        ),
-                        fit: BoxFit.fill)),
+                    image: selectedImage != null? DecorationImage(image: FileImage(selectedImage!)):null
+                )
               ),
               Positioned(
                 top: 10.h,
@@ -85,7 +86,11 @@ class _profileSettingState extends State<profileSetting> {
                   width: 6.h,
                   decoration: BoxDecoration(
                       color: Colors.black, shape: BoxShape.circle),
-                  child: Icon(Icons.camera_alt_outlined, color: Colors.white),
+                  child: InkWell(
+                    onTap:  () {
+                      _pickImageFromGallary();  
+                    },
+                    child: Icon(Icons.camera_alt_outlined, color: Colors.white)),
                 ),
               ),
             ],
@@ -185,5 +190,11 @@ class _profileSettingState extends State<profileSetting> {
                 )
       ],
     ));
+  }
+  Future _pickImageFromGallary() async{
+    final returnedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      selectedImage = File(returnedImage!.path);
+    });
   }
 }

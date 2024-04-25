@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gemstore/screens/discover_screen.dart';
+// import 'package:gemstore/screens/mywishlistscreen';
 import 'package:gemstore/screens/home_page.dart';
 import 'package:gemstore/screens/my_order_screen.dart';
+import 'package:gemstore/screens/mywhishlistscreen.dart';
 import 'package:gemstore/screens/user_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -25,7 +27,7 @@ class home_screen_storeState extends State<home_screen_store> {
     discover_store(),
     order_screen(),
     user_screen(),
-  ];
+   ];
   List<String> title=[
     "Gemstore",
     "Discover",
