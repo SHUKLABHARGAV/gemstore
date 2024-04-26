@@ -6,6 +6,7 @@ import 'package:gemstore/classes/HomeSidebar.dart';
 import 'package:gemstore/classes/catagory_slider_model.dart';
 import 'package:gemstore/classes/feature_product.dart';
 import 'package:gemstore/classes/recommanded_product.dart';
+import 'package:gemstore/screens/bannerscreen.dart';
 import 'package:gemstore/screens/feature_product_listView.dart';
 import 'package:gemstore/screens/home_page_banner.dart';
 import 'package:gemstore/screens/notification_screen.dart';
@@ -171,45 +172,50 @@ class _home_pageState extends State<home_page> {
             ),
             Stack(
               children: [
-              CarouselSlider(
-                carouselController: _controller,
-                options: CarouselOptions(
-                    // height: 22.h,
-                    autoPlay: true,
-                    enlargeFactor: 0.5,
-                    enlargeCenterPage: true,
-                    aspectRatio: 16 / 7,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                      });
-                    }),
-                items: [
-                  ...cattagoryData.map((i) => Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                              alignment: Alignment.topRight,
-                              height: 25.h,
-                              width: 85.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colorhelper.introslider,
-                                  image: DecorationImage(
-                                      image: AssetImage(i.catagoryimg),
-                                      fit: BoxFit.fill)),
-                              child: SizedBox(
-                                width: 28.w,
-                                child: Text(
-                                  i.catagorytext,
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color: Colorhelper.White),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ));
-                        },
-                      ))
-                ].toList(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Bannerscreen(),));
+                },
+                child: CarouselSlider(
+                  carouselController: _controller,
+                  options: CarouselOptions(
+                      // height: 22.h,
+                      autoPlay: true,
+                      enlargeFactor: 0.5,
+                      enlargeCenterPage: true,
+                      aspectRatio: 16 / 7,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _current = index;
+                        });
+                      }),
+                  items: [
+                    ...cattagoryData.map((i) => Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                                alignment: Alignment.topRight,
+                                height: 25.h,
+                                width: 85.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colorhelper.introslider,
+                                    image: DecorationImage(
+                                        image: AssetImage(i.catagoryimg),
+                                        fit: BoxFit.fill)),
+                                child: SizedBox(
+                                  width: 28.w,
+                                    child: Text(
+                                      i.catagorytext,
+                                      style: TextStyle(
+                                          fontSize: 15.sp,
+                                          color: Colorhelper.White),
+                                      textAlign: TextAlign.justify,
+                                    ),
+                                ));
+                          },
+                        ))
+                  ].toList(),
+                ),
               ),
               Positioned(
                 top: 18.h,

@@ -18,18 +18,18 @@ class MyWishlistscreen extends StatefulWidget {
 class _MyWishlistscreenState extends State<MyWishlistscreen> {
 
   List <Wishlist> wishlist = [
-Wishlist(id: 1, wishlistImg:"assets/Images/wishlist1.png" , wishlistTitle: "Front Tie Mini Dress", wishlistPrice: "\$ 59.00"),
-Wishlist(id: 2, wishlistImg:"assets/Images/wishlist2.png" , wishlistTitle: "Linen Dress", wishlistPrice: "\$ 52.00"),
-Wishlist(id: 3, wishlistImg:"assets/Images/wishlist3.png" , wishlistTitle: "Ohara Dress", wishlistPrice: "\$ 85.00"),
-Wishlist(id: 4, wishlistImg:"assets/Images/wishlist4.png" , wishlistTitle: "Tie Back Mini Dress", wishlistPrice: "\$ 67.00"),
-Wishlist(id: 5, wishlistImg:"assets/Images/wishlist1.png" , wishlistTitle: "Front Tie Mini Dress", wishlistPrice: "\$ 59.00"),
-Wishlist(id: 6, wishlistImg:"assets/Images/wishlist2.png" , wishlistTitle: "Linen Dress", wishlistPrice: "\$ 52.00"),
-Wishlist(id: 7, wishlistImg:"assets/Images/wishlist3.png" , wishlistTitle: "Ohara Dress", wishlistPrice: "\$ 85.00"),
-Wishlist(id: 8, wishlistImg:"assets/Images/wishlist4.png" , wishlistTitle: "Tie Back Mini Dress", wishlistPrice: "\$ 67.00"),
-Wishlist(id: 9, wishlistImg:"assets/Images/wishlist1.png" , wishlistTitle: "Front Tie Mini Dress", wishlistPrice: "\$ 59.00"),
-Wishlist(id: 10, wishlistImg:"assets/Images/wishlist2.png" , wishlistTitle: "Linen Dress", wishlistPrice: "\$ 52.00"),
-Wishlist(id: 11, wishlistImg:"assets/Images/wishlist3.png" , wishlistTitle: "Ohara Dress", wishlistPrice: "\$ 85.00"),
-Wishlist(id: 12, wishlistImg:"assets/Images/wishlist4.png" , wishlistTitle: "Tie Back Mini Dress", wishlistPrice: "\$ 67.00"),
+Wishlist(id: 1, wishlistImg:"assets/Images/wishlist1.png" , wishlistTitle: "Front Tie Mini Dress", wishlistPrice: "\$ 59.00", isFavourite: false),
+Wishlist(id: 2, wishlistImg:"assets/Images/wishlist2.png" , wishlistTitle: "Linen Dress", wishlistPrice: "\$ 52.00", isFavourite: false),
+Wishlist(id: 3, wishlistImg:"assets/Images/wishlist3.png" , wishlistTitle: "Ohara Dress", wishlistPrice: "\$ 85.00", isFavourite: false),
+Wishlist(id: 4, wishlistImg:"assets/Images/wishlist4.png" , wishlistTitle: "Tie Back Mini Dress", wishlistPrice: "\$ 67.00", isFavourite: false),
+Wishlist(id: 5, wishlistImg:"assets/Images/wishlist1.png" , wishlistTitle: "Front Tie Mini Dress", wishlistPrice: "\$ 59.00", isFavourite: false),
+Wishlist(id: 6, wishlistImg:"assets/Images/wishlist2.png" , wishlistTitle: "Linen Dress", wishlistPrice: "\$ 52.00", isFavourite: false),
+Wishlist(id: 7, wishlistImg:"assets/Images/wishlist3.png" , wishlistTitle: "Ohara Dress", wishlistPrice: "\$ 85.00", isFavourite: false),
+Wishlist(id: 8, wishlistImg:"assets/Images/wishlist4.png" , wishlistTitle: "Tie Back Mini Dress", wishlistPrice: "\$ 67.00", isFavourite: false),
+Wishlist(id: 9, wishlistImg:"assets/Images/wishlist1.png" , wishlistTitle: "Front Tie Mini Dress", wishlistPrice: "\$ 59.00", isFavourite: false),
+Wishlist(id: 10, wishlistImg:"assets/Images/wishlist2.png" , wishlistTitle: "Linen Dress", wishlistPrice: "\$ 52.00", isFavourite: false),
+Wishlist(id: 11, wishlistImg:"assets/Images/wishlist3.png" , wishlistTitle: "Ohara Dress", wishlistPrice: "\$ 85.00", isFavourite: false),
+Wishlist(id: 12, wishlistImg:"assets/Images/wishlist4.png" , wishlistTitle: "Tie Back Mini Dress", wishlistPrice: "\$ 67.00", isFavourite: false),
   ];
   
   int selectedtabindex =0;
@@ -155,7 +155,18 @@ Wishlist(id: 12, wishlistImg:"assets/Images/wishlist4.png" , wishlistTitle: "Tie
                     top: 0.5.h,
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      child: Icon(Icons.favorite_rounded,color: Color(0xffFF6E6E),),
+                      child: InkWell(
+                        onTap: () {
+                   Wishlist  wishlistdata= wishlist.firstWhere((element) => element.id == wishlist[index].id);
+                   int  wishlistIndex= wishlist.indexWhere((element) => element.id == wishlist[index].id);
+                   Wishlist newWishlistData = Wishlist(id: wishlistdata.id, wishlistImg:wishlistdata.wishlistImg , wishlistTitle: wishlistdata.wishlistTitle , wishlistPrice:wishlistdata.wishlistPrice, isFavourite:wishlistdata.isFavourite == true ? false:true);
+                   wishlist[wishlistIndex]=newWishlistData;
+                   setState(() {
+                     print(wishlistIndex);
+                   });
+
+                        },
+                        child: wishlist[index].isFavourite ? Icon(Icons.favorite_rounded,color: Color(0xffFF6E6E),) : Icon(Icons.favorite_rounded,color: Colors.black,)),
                     ),
                   )
                 ],

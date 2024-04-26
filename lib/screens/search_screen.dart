@@ -88,136 +88,128 @@ class search_screenState extends State<Search_screen> {
  width: 38.h,
           child: Discover_fillter(colorData: colorData, ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 8.h,
-              ),
-              Container(
-                  height: 5.h,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Color(0xffFFFFFF)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 30,
-                    ),
-                  )),
-              SizedBox(
-                height: 3.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: 78.w,
-                    child: FloatingActionButton(
-                      backgroundColor: Color(0xffFAFAFA),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(Icons.search, color: Color(0xff777E90)),
-                            SizedBox(
-                              width: 2.w,
-                            ),
-                            Text(
-                              "Search",
-                              style: TextStyle(
-                                  fontSize: 12.sp, color: Color(0xff777E90)),
-                            )
-                          ],
-                        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 8.h,
+                ),
+                Container(
+                    height: 5.h,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0xffFFFFFF)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 30,
                       ),
-                      onPressed: () {
-                        
-                      },
-                      //  onPressed: () =>  Scaffold.of(context).openEndDrawer(),
-                    ),
-                  ),
-                  FloatingActionButton(
-                    backgroundColor: Color(0xffFAFAFA),
-                     onPressed: () =>  _scaffoldKey.currentState?.openEndDrawer(),
-                    child: Icon(Icons.tune),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                    )),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Recent Searches",
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontFamily: "Nunito-SemiBold",
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold),
+                    SizedBox(
+                      
+                      width: 78.w,
+                      child: TextFormField(
+                    
+                        decoration: InputDecoration(
+                          
+                            hintText: 'Search',
+                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                            prefixIcon: Icon(Icons.search,
+                              color: Color(0xff777E90)),
+                              
+                        ),
+                      ),
                     ),
-                    Icon(
-                      Icons.delete,
-                      color: Colors.grey,
+                    FloatingActionButton(
+                      backgroundColor: Color(0xffFAFAFA),
+                       onPressed: () =>  _scaffoldKey.currentState?.openEndDrawer(),
+                      child: Icon(Icons.tune),
                     )
                   ],
                 ),
-              ),
-              Container(
-                child: GridView.builder(
-                  itemCount: recentSearch.length,
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 3),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 8.0, vertical: 1.h),
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Color(0xffF1F2F3)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(recentSearch[index]),
-                              Icon(Icons.close)
-                            ],
+                SizedBox(
+                  height: 2.h,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Recent Searches",
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontFamily: "Nunito-SemiBold",
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Icon(
+                        Icons.delete,
+                        color: Colors.grey,
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  child: GridView.builder(
+                    itemCount: recentSearch.length,
+                    padding: EdgeInsets.all(0),
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 3),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 8.0, vertical: 1.h),
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Color(0xffF1F2F3)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(recentSearch[index]),
+                                Icon(Icons.close)
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Popular this week", style: TextStyle(fontSize: 14.sp)),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Show all",
-                      style: TextStyle(
-                        color: Color(0xff9B9B9B),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Popular this week", style: TextStyle(fontSize: 14.sp)),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Show all",
+                        style: TextStyle(
+                          color: Color(0xff9B9B9B),
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
-              popular_search_screen(popularData: popularData)
-            ],
+                    )
+                  ],
+                ),
+                popular_search_screen(popularData: popularData)
+              ],
+            ),
           ),
         ));
   }
