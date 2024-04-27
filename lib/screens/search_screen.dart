@@ -1,24 +1,37 @@
  
+import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gemstore/classes/popular_model.dart';
+import 'package:gemstore/classes/wishlist_data.dart';
+import 'package:gemstore/screens/customeSearch.dart';
 import 'package:gemstore/screens/discover_Filter_screen.dart';
+import 'package:gemstore/screens/customeSearchresult.dart';
+import 'package:gemstore/screens/home_page.dart';
 import 'package:gemstore/screens/popular_search_screen.dart';
 // import 'package:gemstore/screens/recent_searches.dart';
 
 import 'package:sizer/sizer.dart';
 
 class Search_screen extends StatefulWidget {
+  
   const Search_screen({
     super.key,
   });
   @override
   State<StatefulWidget> createState() {
+    
     return search_screenState();
   }
 }
 
 class search_screenState extends State<Search_screen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _dropdownSearchFieldController = TextEditingController();
+     String? _selectedFruit;
+
+  SuggestionsBoxController suggestionBoxController = SuggestionsBoxController();
   
 
   List<PopularData> popularData = [
@@ -76,11 +89,40 @@ class search_screenState extends State<Search_screen> {
   'Jeans',
   'T-shirts',
 ];
+   static final List<String> fruits = [
+    'Dress',
+    'Avocado',
+    'Banana',
+    'Blueberries',
+    'Blackberries',
+    'Cherries',
+    'Grapes',
+    'Grapefruit',
+    'Guava',
+    'Kiwi',
+    'Lychee',
+    'Mango',
+    'Orange',
+    'Papaya',
+    'Passion fruit',
+    'Peach',
+    'Pears',
+    'Pineapple',
+    'Raspberries',
+    'Strawberries',
+    'Watermelon',
+  ];
+static List<String> getSuggestions(String query) {
+    List<String> matches = <String>[];
+    matches.addAll(fruits);
 
-
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
         key: _scaffoldKey,
         backgroundColor: Color(0xffFAFAFA),
           endDrawerEnableOpenDragGesture: false,
@@ -114,22 +156,48 @@ class search_screenState extends State<Search_screen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                   
                     SizedBox(
                       
-                      width: 78.w,
-                      child: TextFormField(
+                   width: 78.w,
+                   child:  DropDownSearchField(
                     
-                        decoration: InputDecoration(
-                          
-                            hintText: 'Search',
-                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                            prefixIcon: Icon(Icons.search,
-                              color: Color(0xff777E90)),
-                              
-                        ),
-                      ),
-                    ),
+                    textFieldConfiguration: TextFieldConfiguration(
+                  decoration: const InputDecoration(labelText: 'Fruit'),
+                  controller: _dropdownSearchFieldController,
+                ),
+                    suggestionsCallback: (pattern) {
+                      return getSuggestions(pattern);
+                    },
+                     itemBuilder: (context, String suggestion) {
+                  return ListTile(
+                    title: Text(suggestion),
+                  );
+                },
+                 itemSeparatorBuilder: (context, index) {
+                  return const Divider();
+                },
+                transitionBuilder: (context, suggestionsBox, controller) {
+                  return suggestionsBox;
+                },
+                  onSuggestionSelected: (String suggestion) {
+                  _dropdownSearchFieldController.text = suggestion;
+                       
+                  print(suggestion);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomeSearch(Suggestion: suggestion,),));
+                },
+
+
+
+                  
+
+
+                   suggestionsBoxController: suggestionBoxController,
+               
+                displayAllSuggestionWhenTap: true,
+                   )
+                
+                   ),
                     FloatingActionButton(
                       backgroundColor: Color(0xffFAFAFA),
                        onPressed: () =>  _scaffoldKey.currentState?.openEndDrawer(),
@@ -207,7 +275,13 @@ class search_screenState extends State<Search_screen> {
                     )
                   ],
                 ),
-                popular_search_screen(popularData: popularData)
+                popular_search_screen(popularData: popularData),
+                SizedBox(
+                  height: 2.h,
+                ),
+                
+              
+               
               ],
             ),
           ),
